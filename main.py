@@ -15,6 +15,9 @@ start_date = os.getenv('START_DATE')
 city = os.getenv('CITY')
 birthday = os.getenv('BIRTHDAY')
 left_day_notice = 1400
+left_format = '距离你的生日还有%d天\n'
+love_unit = 1
+love_format = '我们已经相爱了%d天\n'
 
 app_id = os.getenv('APP_ID')
 app_secret = os.getenv('APP_SECRET')
@@ -141,9 +144,11 @@ data = {
 
 love_days = get_memorial_days_count()
 # 整月发送
-if love_days % 30 == 0:
+if love_days % love_unit == 0:
+  num = love_days / love_unit
+  word = love_format % num
   data["love_days"] = {
-    "value": get_memorial_days_count(),
+    "value": word,
     "color": get_random_color()
   }
 
@@ -152,12 +157,13 @@ for index, aim_date in enumerate(split_birthday()):
   # 距离太远则不提醒
   if day > left_day_notice:
     continue
+  value = left_format % (day)
   
   key_name = "birthday_left"
   if index != 0:
     key_name = key_name + "_%d" % index
   data[key_name] = {
-    "value": day,
+    "value": value,
     "color": get_random_color()
   }
 
