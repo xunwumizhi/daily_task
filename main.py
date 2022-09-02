@@ -13,11 +13,11 @@ today = datetime.strptime(str(nowtime.date()), "%Y-%m-%d") #今天的日期
 
 start_date = os.getenv('START_DATE')
 city = os.getenv('CITY')
+love_unit = 1
+love_format = '\n我们已经相爱了%d天'
 birthday = os.getenv('BIRTHDAY')
 left_day_notice = 1400
-left_format = '距离你的生日还有%d天\n'
-love_unit = 1
-love_format = '我们已经相爱了%d天\n'
+left_format = '\n距离你的生日还有%d天\n'
 
 app_id = os.getenv('APP_ID')
 app_secret = os.getenv('APP_SECRET')
