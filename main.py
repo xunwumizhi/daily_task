@@ -15,7 +15,8 @@ start_date = os.getenv('START_DATE')
 city = os.getenv('CITY')
 birthday = os.getenv('BIRTHDAY')
 love_unit = 30
-love_format = '我们已经相爱了 %d 个月\n'
+# love_format = '我们已经相爱了 %d 个月\n'
+love_format = '我们已经认识了 %d 个月\n'
 left_day_notice = 14
 left_format = '距离你的生日还有 %d 天\n'
 
