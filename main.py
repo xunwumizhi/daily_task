@@ -6,6 +6,7 @@ import requests
 import os
 import random
 import re
+from util import get_random_color, get_my_word
 
 nowtime = datetime.utcnow() + timedelta(hours=8)  # 东八区时间
 today = datetime.strptime(str(nowtime.date()), "%Y-%m-%d") #今天的日期
@@ -13,6 +14,7 @@ today = datetime.strptime(str(nowtime.date()), "%Y-%m-%d") #今天的日期
 start_date = os.getenv('START_DATE')
 city = os.getenv('CITY')
 birthday = os.getenv('BIRTHDAY')
+left_day_notice = 1400
 
 app_id = os.getenv('APP_ID')
 app_secret = os.getenv('APP_SECRET')
@@ -76,20 +78,6 @@ def get_counter_left(aim_date):
     next = next.replace(year=next.year + 1)
   return (next - today).days
 
-# 彩虹屁 接口不稳定，所以失败的话会重新调用，直到成功
-def get_words():
-  words = requests.get("https://api.shadiao.pro/chp")
-  if words.status_code != 200:
-    return get_words()
-  return words.json()['data']['text']
-
-def format_temperature(temperature):
-  return math.floor(temperature)
-
-# 随机颜色
-def get_random_color():
-  return "#%06x" % random.randint(0, 0xFFFFFF)
-
 # 返回一个数组，循环产生变量
 def split_birthday():
   if birthday is None:
@@ -145,22 +133,31 @@ data = {
     "value": math.floor(weather['low']),
     "color": get_random_color()
   },
-  "love_days": {
-    "value": get_memorial_days_count(),
-    "color": get_random_color()
-  },
   "words": {
-    "value": get_words(),
+    "value": get_my_word(),
     "color": get_random_color()
   },
 }
 
+love_days = get_memorial_days_count()
+# 整月发送
+if love_days % 30 == 0:
+  data["love_days"] = {
+    "value": get_memorial_days_count(),
+    "color": get_random_color()
+  }
+
 for index, aim_date in enumerate(split_birthday()):
+  day = get_counter_left(aim_date)
+  # 距离太远则不提醒
+  if day > left_day_notice:
+    continue
+  
   key_name = "birthday_left"
   if index != 0:
     key_name = key_name + "_%d" % index
   data[key_name] = {
-    "value": get_counter_left(aim_date),
+    "value": day,
     "color": get_random_color()
   }
 
