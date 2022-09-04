@@ -6,7 +6,8 @@ import requests
 import os
 import random
 import re
-from util import get_random_color, get_my_word
+from util import get_random_color, get_my_word, get_interval_count
+from dateutil import rrule
 
 nowtime = datetime.utcnow() + timedelta(hours=8)  # 东八区时间
 today = datetime.strptime(str(nowtime.date()), "%Y-%m-%d") #今天的日期
@@ -14,11 +15,12 @@ today = datetime.strptime(str(nowtime.date()), "%Y-%m-%d") #今天的日期
 start_date = os.getenv('START_DATE')
 city = os.getenv('CITY')
 birthday = os.getenv('BIRTHDAY')
-love_unit = 30
-# love_format = '我们已经相爱了 %d 个月\n'
-love_format = '我们已经相识了 %d 个月\n'
-left_day_notice = 14
-left_format = '距离你的生日还有 %d 天\n'
+
+love_freq = rrule.DAILY
+love_format = '这是我们相识的第 %d 天\n'
+
+left_day_notice = 30
+left_format = '距离妹妹的生日还有 %d 天\n'
 
 app_id = os.getenv('APP_ID')
 app_secret = os.getenv('APP_SECRET')
@@ -61,8 +63,11 @@ def get_memorial_days_count():
   if start_date is None:
     print('没有设置 START_DATE')
     return 0
-  delta = today - datetime.strptime(start_date, "%Y-%m-%d")
-  return delta.days
+  st = datetime.strptime(start_date, "%Y-%m-%d")
+  cnt = get_interval_count(love_freq, st, today)
+  # delta = today - st
+  # cnt = delta.days
+  return cnt
 
 # 各种倒计时
 def get_counter_left(aim_date):
@@ -143,15 +148,12 @@ data = {
   },
 }
 
-love_days = get_memorial_days_count()
-# 整月发送
-if love_days % love_unit == 0:
-  num = love_days / love_unit
-  word = love_format % num
-  data["love_days"] = {
-    "value": word,
-    "color": get_random_color()
-  }
+love_cnt = get_memorial_days_count()
+word = love_format % love_cnt
+data["love_days"] = {
+  "value": word,
+  "color": get_random_color()
+}
 
 for index, aim_date in enumerate(split_birthday()):
   day = get_counter_left(aim_date)

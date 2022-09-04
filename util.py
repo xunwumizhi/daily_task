@@ -1,8 +1,9 @@
 # -*- coding:utf-8 -*-
 from urllib import request
-from datetime import date, datetime, timedelta
+import datetime
 import requests
 import random
+from dateutil import rrule
 
 url = "https://raw.githubusercontent.com/xunwumizhi/written-expression/main/writing-notes.md"
 spacer = "\r\n\r\n"
@@ -37,5 +38,15 @@ def get_words():
 def get_random_color():
     return "#%06x" % random.randint(0, 0xFFFFFF)
 
-testCs = ['# 段落摘抄', '## 默念的时时刻刻', '```', "去哪里呀", "做核酸呀"]
-# print(randomStr(testCs))
+# get_interval_count 有几个起点
+def get_interval_count(freq, st, until):
+    points = rrule.rrule(freq, dtstart=st, until=until)
+    # for point in list(points):
+    #     print(point) # 打印间隔的每个月
+    cnt = points.count()
+    print(cnt)
+    return cnt
+
+# get_interval_count(rrule.DAILY,datetime.date(2022,8,6),datetime.date(2022,8,9))
+# get_interval_count(rrule.WEEKLY,datetime.date(2022,8,6),datetime.date(2022,8,13))
+# get_interval_count(rrule.MONTHLY,datetime.date(2022,8,6),datetime.date(2022,8,7))
