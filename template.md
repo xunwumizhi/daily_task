@@ -3,7 +3,7 @@
 /
 
 今天是 {{date.DATA}} {{week_day.DATA}} 
-天气 {{weather.DATA}} 空气质量 {{air_quality.DATA}}
+{{city.DATA}} 天气 {{weather.DATA}} 空气质量 {{air_quality.DATA}}
 最低温度 {{lowest.DATA}} °C，最高温度 {{highest.DATA}} °C
 {{love_days.DATA}}{{birthday_left.DATA}}
 每日一句： 
