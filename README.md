@@ -4,19 +4,19 @@
 
 代码里面要求的配置：
 
-APP_ID: 公众平台 appID
+`APP_ID`: 公众平台 appID
 
-APP_SECRET: 公众平台 appSecret
+`APP_SECRET`: 公众平台 appSecret
 
-TEMPLATE_ID: 模板 ID
+`TEMPLATE_ID`: 模板 ID
 
-USER_ID: 接收人的 OpenID 多个用换行分隔
+`USER_ID`: 接收人的 OpenID 多个用换行分隔
 
-BIRTHDAY: 倒数日（原生日），换行分隔，见更新说明。格式如 05-20，1999-11-04 这种
+`BIRTHDAY`: 倒数日（原生日），换行分隔，见更新说明。格式如 05-20，1999-11-04 这种
 
-START_DATE: 正数日期，格式：2008-08-08
+`START_DATE`: 正数日期，格式：2008-08-08
 
-CITY: 城市，不要加市，准确到地级市。比如：北京、天津、广州、承德。
+`CITY`: 城市，不要加市，准确到地级市。比如：北京、天津、广州、承德。
 
 最终推送模板见：[here](./template.md)
 
