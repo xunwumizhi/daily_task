@@ -1,6 +1,4 @@
-# 每日定时
-
-这里有[更新说明](./UPGRADE.md)
+# 测试公众号推送
 
 ## 使用说明
 
@@ -46,7 +44,7 @@ cd daily_morning
 pip3 install -r requirements.txt
 ```
 
-3. 根据示例完成配置文件`config.yaml`。 `app_id`、 `app_secret`、 `user_ids` 和 `template_id` 的配置可参考[使用说明](#使用说明)
+3. 根据示例完成配置文件`config.yaml`
 
 4. 运行代码`timer.py`，即可实现每日定时发送：
 
