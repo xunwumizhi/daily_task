@@ -16,9 +16,12 @@ app_secret = os.getenv('APP_SECRET')
 user_ids = os.getenv('USER_ID', '').split("\n")
 template_id = os.getenv('TEMPLATE_ID')
 
-citys = os.getenv('CITY').split("\n")
-accumulation = os.getenv('SUMCNT').split("\n")
-countdown = os.getenv('COUNTDOWN').split("\n")
+citys = os.getenv('CITY', '').split("\n")
+print("CITY: ", citys)
+accumulation = os.getenv('SUMCNT', '').split("\n")
+print("SUMCNT: ", accumulation)
+countdown = os.getenv('COUNTDOWN', '').split("\n")
+print("COUNTDOWN: ", countdown)
 
 # check env vars
 if app_id is None or app_secret is None:
