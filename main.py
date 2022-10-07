@@ -44,12 +44,12 @@ data = {
     "color": get_random_color()
   },
   "week_day": {
-    "value": get_week_day(),
+    "value": get_week_day(today),
     "color": get_random_color()
   },
 
   "combine_weather": {
-    "value": get_weather_str(),
+    "value": get_weather_str(citys),
     "color": get_random_color()
   },
   "combine_accumulation_count": {
@@ -57,7 +57,7 @@ data = {
     "color": get_random_color()
   },
   "combine_countdown": {
-    "value": get_countdown_str(),
+    "value": get_countdown_str(countdown, today, nowtime),
     "color": get_random_color()
   },
 
