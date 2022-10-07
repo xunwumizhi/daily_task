@@ -53,7 +53,7 @@ data = {
     "color": get_random_color()
   },
   "combine_accumulation_count": {
-    "value": get_accmulation_str(),
+    "value": get_accmulation_str(accumulation, today),
     "color": get_random_color()
   },
   "combine_countdown": {
