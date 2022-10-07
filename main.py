@@ -17,7 +17,7 @@ user_ids = os.getenv('USER_ID', '').split("\n")
 template_id = os.getenv('TEMPLATE_ID')
 
 citys = os.getenv('CITY').split("\n")
-accumulation = os.getenv('SUM').split("\n")
+accumulation = os.getenv('SUMCNT').split("\n")
 countdown = os.getenv('COUNTDOWN').split("\n")
 
 # check env vars
