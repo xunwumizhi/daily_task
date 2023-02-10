@@ -41,29 +41,30 @@ if template_id is None:
 data = {
   "date": {
     "value": today.strftime('%Y年%m月%d日'),
-    "color": get_random_color()
+    # "color": get_random_color()
   },
   "week_day": {
     "value": get_week_day(today),
-    "color": get_random_color()
+    # "color": get_random_color()
   },
 
-  "combine_weather": {
-    "value": get_weather_str(citys),
-    "color": get_random_color()
-  },
+  # "combine_weather": {
+  #   "value": get_weather_str(citys),
+  #   "color": get_random_color()
+  # },
+  
   "combine_accumulation_count": {
     "value": get_accmulation_str(accumulation, today),
-    "color": get_random_color()
+    # "color": get_random_color()
   },
   "combine_countdown": {
     "value": get_countdown_str(countdown, today, nowtime),
-    "color": get_random_color()
+    # "color": get_random_color()
   },
 
   "words": {
     "value": get_my_word(),
-    "color": get_random_color()
+    # "color": get_random_color()
   },
 }
 

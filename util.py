@@ -58,10 +58,27 @@ def get_weather(city):
     print(city)
     url = "http://autodev.openspeech.cn/csp/api/v2.1/weather?openId=aiuicus&clientType=android&sign=android&city=" + city
     res = requests.get(url).json()
+    print(res)
     if res is None:
         return None
     weather = res['data']['list'][0]
     return weather
+
+# city = "101220101"         #城市天气查询的id ,根据自己城市上网查询即可,当前是合肥市
+def get_weather_v1(cityCode):
+    url = "http://t.weather.sojson.com/api/weather/city/" + cityCode
+    res = requests.get(url).json()
+    # weather = res['data']['list'][0]
+    today = res['data']
+    todayDetail = res['data']['forecast'][0]
+    # return weather['quality'], math.floor(weather['wendu'])
+    cityName = res['cityInfo']['city']
+    weather = today['wendu']
+    airQuality = today['quality']
+    low = todayDetail['low']
+    high = todayDetail['high']
+    print(cityName,weather,airQuality,low,high)
+    return 
 
 # 获取当前日期为星期几
 def get_week_day(today):
@@ -114,12 +131,15 @@ def get_counter_left(aim_date, today, nowtime):
 def get_weather_str(citys):
     weatherStr = ""
     for city in citys:
-        st = get_weather(city)
+        # st = get_weather(city)
+        # cityName = city
+        st = get_weather_v1(city)
+        cityName = st['cityName']
         w = st['weather']
         aq = st['airQuality']
         lowest = st["low"]
         highest = st["high"]
-        weatherStr += weather_format % (city, w, aq, lowest, highest)
+        weatherStr += weather_format % (cityName, w, aq, lowest, highest)
         weatherStr += "\n"
     print(weatherStr)
     return weatherStr
@@ -165,8 +185,10 @@ def get_countdown_str(countdown, today, nowtime):
     print(cStr)
     return cStr
 
+
+
 '''
-testing
+testing case
 '''
 
 # get_interval_count(rrule.DAILY,datetime.date(2022,8,6),datetime.date(2022,8,9))
@@ -187,3 +209,7 @@ testing
 # get_accmulation_str(s.split("\n"), today)
 # s = "距离妹妹的生日还有 %d 天|1997-10-08|300|今天生日！"
 # get_countdown_str(s.split("\n"), today, nowtime)
+
+## 天气测试
+#
+# get_weather_v1('101220101')
