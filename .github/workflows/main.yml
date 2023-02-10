@@ -16,10 +16,11 @@ jobs:
         ref: ${{ env.GITHUB_REF_NAME }}
 
     - name: sender
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v4
       with:
         python-version: '3.x'
         architecture: 'x64'
+        # cache: 'pip' # caching pip dependencies
     - run: pip install -r ./requirements.txt && python ./main.py
 
     env:
