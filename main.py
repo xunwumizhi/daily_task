@@ -2,7 +2,7 @@ from datetime import date, datetime, timedelta
 from wechatpy import WeChatClient, WeChatClientException
 from wechatpy.client.api import WeChatMessage
 import os
-from util import get_accmulation_str, get_countdown_str, get_random_color, get_my_word, get_weather_str, get_week_day
+from util import get_accmulation_str, get_countdown_str, get_random_color, get_my_word, get_weather_str, get_week_day, proc_wx_data
 
 #
 # 变量
@@ -48,10 +48,11 @@ data = {
     # "color": get_random_color()
   },
 
-  # "combine_weather": {
-  #   "value": get_weather_str(citys),
-  #   "color": get_random_color()
-  # },
+  "combine_weather": {
+    # "value": get_weather_str(citys),
+    "value": "",
+    "color": get_random_color()
+  },
   
   "combine_accumulation_count": {
     "value": get_accmulation_str(accumulation, today),
@@ -67,6 +68,8 @@ data = {
     # "color": get_random_color()
   },
 }
+
+proc_wx_data(data)
 
 #
 # main

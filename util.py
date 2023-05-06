@@ -6,6 +6,18 @@ from dateutil import rrule
 import re
 from datetime import date, datetime, timedelta
 
+def proc_wx_data(data):
+    s = data["words"]["value"]
+    n = 20  # 每个数组元素的长度
+    result = []
+    for i in range(0, len(s), n):
+        result.append(s[i:i+n])
+    print(result)
+
+    for i in range(len(result)):
+        data["line%d" % i] = {"value": result[i]}
+    print("data %s" % data)
+
 url = "https://raw.githubusercontent.com/xunwumizhi/written-expression/main/writing-notes.md"
 spacer = "\r\n\r\n"
 jumpStr = ("#", "```")
